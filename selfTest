@@ -72,64 +72,33 @@ class selfTest{
        return $htmlRes;
    }
 }
-    $primeNoCnt   = 10;                                   // Pass the prime number count.
-    $selfTestObj  = new selfTest();                       // Creating selfTest class object
-    $primeArry    = $selfTestObj->getTableRecords($req);  // Calling the function using the class object. 
-    print_r($primeArry);                                  // Print desired output.
+    $primeNoCnt   = 10;                                           // Pass the prime number count.
+    $reqHtml      = 1;                                           // Set this value if you want to show in HTML
+    $selfTestObj  = new selfTest();                               // Creating selfTest class object
+    if($reqHtml){
+      $primeArry    = $selfTestObj->getTableRecordsHtml($primeNoCnt);   // Calling the function using the class object to get records in html table. 
+    } else { 
+      $primeArry    = $selfTestObj->getTableRecords($primeNoCnt);   // Calling the function using the class object to get records in json
+    }
+    echo $primeArry;                                          // Print desired output.
     
     
     pass the param using the get method.
+---------------------------------------------------------------------------------------------------------------
 EX:
-$primeNoCnt   = 5;
+$primeNoCnt   = 5; $reqHtml = 1
 
 OUTPUT :: 
-Array
-(
-    [2] => Array
-        (
-            [2] => 4
-            [3] => 6
-            [5] => 10
-            [7] => 14
-            [11] => 22
-        )
+-	2	3	5	7	11
+2	4	6	10	14	22
+3	6	9	15	21	33
+5	10	15	25	35	55
+7	14	21	35	49	77
+11	22	33	55	77	121
+---------------------------------------------------------------------------------------------------------------
+EX:
+$primeNoCnt   = 5; $reqHtml = 0
 
-    [3] => Array
-        (
-            [2] => 6
-            [3] => 9
-            [5] => 15
-            [7] => 21
-            [11] => 33
-        )
-
-    [5] => Array
-        (
-            [2] => 10
-            [3] => 15
-            [5] => 25
-            [7] => 35
-            [11] => 55
-        )
-
-    [7] => Array
-        (
-            [2] => 14
-            [3] => 21
-            [5] => 35
-            [7] => 49
-            [11] => 77
-        )
-
-    [11] => Array
-        (
-            [2] => 22
-            [3] => 33
-            [5] => 55
-            [7] => 77
-            [11] => 121
-        )
-
-)
+OUTPUT :: {"2":{"0":2,"2":4,"3":6,"5":10,"7":14,"11":22},"3":{"0":3,"2":6,"3":9,"5":15,"7":21,"11":33},"5":{"0":5,"2":10,"3":15,"5":25,"7":35,"11":55},"7":{"0":7,"2":14,"3":21,"5":35,"7":49,"11":77},"11":{"0":11,"2":22,"3":33,"5":55,"7":77,"11":121}}
     
 ?>
