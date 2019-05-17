@@ -2,7 +2,6 @@
 <?php
 /*
 * Creating the class
-* Live Link : http://palmtopenterprises.com/selfTest.php?p=5
 */
 class selfTest{
 
@@ -24,15 +23,16 @@ class selfTest{
             }  
             $num=$num+1;  
         } 
-       return $primeArry;
+       return json_encode($primeArry);
    }
    
 //  This function multiply all the prime number with the prime number and returns the data. where $x defines the prime number count.
-   public function getTableRecords($x = 1){
-       $primeArry = $this->getPrimeNumber($x);
+   public function getTableRecords($x = 1,$html = false){
+       $primeArry = json_decode($this->getPrimeNumber($x));
        $primeArryMul = array();
        if(!empty($primeArry)){
             foreach($primeArry as $key => $value){
+                $primeArryMul[$value][0] = $value;
                 foreach($primeArry as $key1 => $value1){
                     $primeArryMul[$value][$value1] = $value * $value1;
                }
@@ -40,7 +40,36 @@ class selfTest{
        }else{
            echo "Please enter valid prime number length.";exit;
        }
-       return $primeArryMul;
+       return json_encode($primeArryMul);
+   }
+   
+//  This function multiply all the prime number with the prime number and returns the data in html table form. where $x defines the prime number count.
+   public function getTableRecordsHtml($x = 1){
+       $primeArry = json_decode($this->getPrimeNumber($x));
+       $htmlRes = $tHead = "";
+       if(!empty($primeArry)){
+          $htmlRes .="<style>table { border-collapse: collapse;}td, th { border: 1px solid black;} th {background-color:gray;color:white;}</style>";
+            $htmlRes .="<table>";
+            $htmlRes .="<tr><th> - </th>##THEAD##</tr>";
+            foreach($primeArry as $key => $value){
+                $htmlRes .="<tr>";
+                foreach($primeArry as $key1 => $value1){
+                    if($key1 === 0){
+                        $htmlRes .="<th> $value </th>";
+                    }
+                    if($key === 0){
+                        $tHead .="<th> $value1 </th>";
+                    }
+                    $htmlRes .="<td> ".$value * $value1." </td>";
+                }
+                $htmlRes .="</tr>";
+            }
+            $htmlRes .="</table>";
+       }else{
+           $htmlRes .="Please enter valid prime number length.";exit;
+       }
+       $htmlRes = str_replace("##THEAD##",$tHead,$htmlRes);
+       return $htmlRes;
    }
 }
     $primeNoCnt   = 10;                                   // Pass the prime number count.
