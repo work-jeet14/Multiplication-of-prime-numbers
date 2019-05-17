@@ -2,6 +2,7 @@
 <?php
 /*
 * Creating the class
+* Live Link : http://palmtopenterprises.com/selfTest.php?p=5
 */
 class selfTest{
 
