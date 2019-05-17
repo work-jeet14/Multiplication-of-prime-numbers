@@ -1,0 +1,105 @@
+
+<?php
+/*
+* Creating the class
+*/
+class selfTest{
+
+//  This function collect all the prime number. where $n defines the prime number count.
+   public function getPrimeNumber($n = 1){
+       $primeArry = array();
+       $count = 0;  
+        $num = 2;  
+        while ($count < $n ) {  
+            $div_count=0;  
+            for ( $i=1; $i<=$num; $i++){  
+                if (($num%$i)==0){  
+                $div_count++;  
+                }  
+            }  
+            if ($div_count<3){  
+                $primeArry[] = $num;
+                $count=$count+1;  
+            }  
+            $num=$num+1;  
+        } 
+       return $primeArry;
+   }
+   
+//  This function multiply all the prime number with the prime number and returns the data. where $x defines the prime number count.
+   public function getTableRecords($x = 1){
+       $primeArry = $this->getPrimeNumber($x);
+       $primeArryMul = array();
+       if(!empty($primeArry)){
+            foreach($primeArry as $key => $value){
+                foreach($primeArry as $key1 => $value1){
+                    $primeArryMul[$value][$value1] = $value * $value1;
+               }
+           }
+       }else{
+           echo "Please enter valid prime number length.";exit;
+       }
+       return $primeArryMul;
+   }
+}
+    $primeNoCnt   = 10;                                   // Pass the prime number count.
+    $selfTestObj  = new selfTest();                       // Creating selfTest class object
+    $primeArry    = $selfTestObj->getTableRecords($req);  // Calling the function using the class object. 
+    print_r($primeArry);                                  // Print desired output.
+    
+    
+    pass the param using the get method.
+EX:
+$primeNoCnt   = 5;
+
+OUTPUT :: 
+Array
+(
+    [2] => Array
+        (
+            [2] => 4
+            [3] => 6
+            [5] => 10
+            [7] => 14
+            [11] => 22
+        )
+
+    [3] => Array
+        (
+            [2] => 6
+            [3] => 9
+            [5] => 15
+            [7] => 21
+            [11] => 33
+        )
+
+    [5] => Array
+        (
+            [2] => 10
+            [3] => 15
+            [5] => 25
+            [7] => 35
+            [11] => 55
+        )
+
+    [7] => Array
+        (
+            [2] => 14
+            [3] => 21
+            [5] => 35
+            [7] => 49
+            [11] => 77
+        )
+
+    [11] => Array
+        (
+            [2] => 22
+            [3] => 33
+            [5] => 55
+            [7] => 77
+            [11] => 121
+        )
+
+)
+    
+?>
