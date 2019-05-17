@@ -2,6 +2,8 @@
 <?php
 /*
 * Creating the class
+* Test URL HTML : http://check.palmtopenterprises.com/selfTest.php?p=5&html=1
+* Test URL JSON : http://check.palmtopenterprises.com/selfTest.php?p=5
 */
 class selfTest{
 
